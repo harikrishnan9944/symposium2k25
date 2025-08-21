@@ -32,9 +32,8 @@ export default function RootLayout({
         <div className="flex">
           {/* Sidebar */}
           <Sidebar />
-
-          {/* Main content with left padding to avoid overlap */}
-          <main className="flex-1 lg:ml-[240px] ml-[70px] p-2 transition-all ">
+          <main className=" flex flex-1 lg:ml-[240px] ml-[70px] justify-center items-center overflow-y-hidden
+           p-2">
             {children}
           </main>
         </div>

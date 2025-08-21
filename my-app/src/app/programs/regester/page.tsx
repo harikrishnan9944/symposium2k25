@@ -2,16 +2,27 @@
 
 import { Formik, Form, Field, FieldArray } from "formik";
 import { useState } from "react";
-import axios from "axios";
 
-export default function CandidateRegistrationForm() {
+export default function RegistrationForm() {
   const [teamParticipation, setTeamParticipation] = useState("individual");
 
+  // Available event options
+  const eventOptions = [
+    "Paper Presentation",
+    "Coding Challenge",
+    "Technical Quiz",
+    "Poster Design",
+    "Hackathon",
+    "Workshop",
+    "Debugging",
+    "Idea Pitching",
+  ];
+
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gradient-to-br bg-gradient-to-br from-blue-600 via-indigo-700 to-purple-800 rounded p-4">
-      <div className="w-full max-w-5xl bg-white shadow-2xl rounded-2xl p-8">
-        <h1 className="text-3xl font-extrabold text-center mb-8 text-indigo-800">
-          Candidate Registration Form
+    <div className="flex items-center justify-center bg-gradient-to-br from-blue-600 via-indigo-700 to-purple-800 p-4">
+      <div className="w-full max-w-4xl bg-white shadow-2xl rounded-2xl p-8 ">
+        <h1 className="text-3xl font-extrabold text-center text-indigo-700 mb-6">
+          Symposium 2K25 Registration
         </h1>
 
         <Formik
@@ -30,157 +41,166 @@ export default function CandidateRegistrationForm() {
             events: [],
             teamParticipation: "individual",
             teamName: "",
-            members: [""],
+            members: [{ name: "", email: "", department: "" }],
           }}
-          onSubmit={async (values, { resetForm }) => {
-            try {
-              const res = await axios.post("/api/my", values);
-              console.log(res.data.data);
-
-              alert("Registration submitted successfully!");
-              resetForm();
-            } catch (err) {
-              console.error("Submission Error:", err);
-              alert("Something went wrong. Try again.");
-            }
+          onSubmit={(values) => {
+            console.log(values);
+            alert("Form submitted! Check console for data ✅");
           }}
         >
-          {({ values, handleChange }) => (
-            <Form className="space-y-8">
-              {/* Personal Details */}
-              <section className="bg-gray-50 p-6 rounded-xl shadow-md">
-                <h2 className="text-2xl font-semibold mb-4 text-indigo-700 border-b pb-2">
-                  Personal Details
-                </h2>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-                  <Field
-                    name="firstName"
-                    placeholder="First Name"
-                    className="border p-3 rounded-lg focus:ring-2 focus:ring-indigo-400 outline-none"
-                  />
-                  <Field
-                    name="middleName"
-                    placeholder="Middle Name"
-                    className="border p-3 rounded-lg focus:ring-2 focus:ring-indigo-400 outline-none"
-                  />
-                  <Field
-                    name="lastName"
-                    placeholder="Last Name"
-                    className="border p-3 rounded-lg focus:ring-2 focus:ring-indigo-400 outline-none"
-                  />
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-                  <Field
-                    as="select"
-                    name="gender"
-                    className="border p-3 rounded-lg focus:ring-2 focus:ring-indigo-400 outline-none"
-                  >
-                    <option value="">Select Gender</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                    <option value="Other">Other</option>
-                  </Field>
-                  <Field
-                    type="date"
-                    name="dob"
-                    className="border p-3 rounded-lg focus:ring-2 focus:ring-indigo-400 outline-none"
-                  />
-                  <Field
-                    name="contact"
-                    placeholder="Contact Number"
-                    className="border p-3 rounded-lg focus:ring-2 focus:ring-indigo-400 outline-none"
-                  />
-                </div>
-
+          {({ values, setFieldValue }) => (
+            <Form className="space-y-6">
+              {/* Personal Info */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <Field
-                  type="email"
-                  name="email"
-                  placeholder="Email Address"
-                  className="border p-3 rounded-lg w-full focus:ring-2 focus:ring-indigo-400 outline-none"
+                  name="firstName"
+                  placeholder="First Name"
+                  className="border p-3 rounded-lg focus:ring-2 focus:ring-indigo-400 outline-none"
                 />
-              </section>
+                <Field
+                  name="middleName"
+                  placeholder="Middle Name"
+                  className="border p-3 rounded-lg focus:ring-2 focus:ring-indigo-400 outline-none"
+                />
+                <Field
+                  name="lastName"
+                  placeholder="Last Name"
+                  className="border p-3 rounded-lg focus:ring-2 focus:ring-indigo-400 outline-none"
+                />
+              </div>
 
-              {/* Academic Info */}
-              <section className="bg-gray-50 p-6 rounded-xl shadow-md">
-                <h2 className="text-2xl font-semibold mb-4 text-indigo-700 border-b pb-2">
-                  Academic Information
-                </h2>
+              {/* Contact Info */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <Field
+                  name="email"
+                  type="email"
+                  placeholder="Email"
+                  className="border p-3 rounded-lg focus:ring-2 focus:ring-indigo-400 outline-none"
+                />
+                <Field
+                  name="contact"
+                  placeholder="Contact Number"
+                  className="border p-3 rounded-lg focus:ring-2 focus:ring-indigo-400 outline-none"
+                />
+              </div>
+
+              {/* College Info */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <Field
                   name="college"
-                  placeholder="College / University Name"
-                  className="border p-3 rounded-lg w-full mb-4 focus:ring-2 focus:ring-indigo-400 outline-none"
+                  placeholder="College Name"
+                  className="border p-3 rounded-lg focus:ring-2 focus:ring-indigo-400 outline-none"
                 />
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                  <Field
-                    name="department"
-                    placeholder="Department / Branch"
-                    className="border p-3 rounded-lg focus:ring-2 focus:ring-indigo-400 outline-none"
-                  />
-                  <Field
-                    as="select"
-                    name="year"
-                    className="border p-3 rounded-lg focus:ring-2 focus:ring-indigo-400 outline-none"
-                  >
-                    <option value="">Select Year</option>
-                    <option value="I Year">I Year</option>
-                    <option value="II Year">II Year</option>
-                    <option value="III Year">III Year</option>
-                    <option value="IV Year">IV Year</option>
-                  </Field>
-                </div>
+                <Field
+                  name="department"
+                  placeholder="Department"
+                  className="border p-3 rounded-lg focus:ring-2 focus:ring-indigo-400 outline-none"
+                />
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <Field
+                  name="year"
+                  placeholder="Year"
+                  className="border p-3 rounded-lg focus:ring-2 focus:ring-indigo-400 outline-none"
+                />
                 <Field
                   name="rollNo"
-                  placeholder="Roll / Register Number (Optional)"
-                  className="border p-3 rounded-lg w-full focus:ring-2 focus:ring-indigo-400 outline-none"
+                  placeholder="Roll Number"
+                  className="border p-3 rounded-lg focus:ring-2 focus:ring-indigo-400 outline-none"
                 />
-              </section>
+              </div>
 
-              {/* Event Preferences */}
-              <section className="bg-gray-50 p-6 rounded-xl shadow-md">
-                <h2 className="text-2xl font-semibold mb-4 text-indigo-700 border-b pb-2">
-                  Event Preferences
-                </h2>
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-4">
-                  {["Paper Presentation", "Coding Contest", "Hackathon", "Quiz", "Debugging"].map(
-                    (event) => (
-                      <label key={event} className="flex items-center space-x-2">
-                        <Field type="checkbox" name="events" value={event} className="h-4 w-4" />
-                        <span>{event}</span>
-                      </label>
-                    )
-                  )}
+              {/* Event Selection */}
+              <div>
+                <label className="block mb-2 font-semibold">Select Events</label>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                  {eventOptions.map((event, index) => (
+                    <label key={index} className="flex items-center gap-2">
+                      <input
+                        type="checkbox"
+                        name="events"
+                        value={event}
+                        checked={values.events.includes(event)}
+                        onChange={(e) => {
+                          if (e.target.checked) {
+                            setFieldValue("events", [...values.events, event]);
+                          } else {
+                            setFieldValue(
+                              "events",
+                              values.events.filter((ev) => ev !== event)
+                            );
+                          }
+                        }}
+                      />
+                      {event}
+                    </label>
+                  ))}
                 </div>
+              </div>
 
-                <Field
-                  as="select"
-                  name="teamParticipation"
-                  className="border p-3 rounded-lg w-full mb-4 focus:ring-2 focus:ring-indigo-400 outline-none"
-                  onChange={(e: any) => {
-                    handleChange(e);
-                    setTeamParticipation(e.target.value);
-                  }}
-                >
-                  <option value="individual">Individual</option>
-                  <option value="team">Team</option>
-                </Field>
-
-                {teamParticipation === "team" && (
-                  <div className="border rounded-xl p-4 bg-white shadow-inner">
-                    <Field
-                      name="teamName"
-                      placeholder="Team Name"
-                      className="border p-3 rounded-lg w-full mb-3 focus:ring-2 focus:ring-indigo-400 outline-none"
+              {/* Team Participation */}
+              <div>
+                <label className="block mb-2 font-semibold">Participation Type</label>
+                <div className="flex gap-6">
+                  <label className="flex items-center gap-2">
+                    <input
+                      type="radio"
+                      name="teamParticipation"
+                      value="individual"
+                      checked={teamParticipation === "individual"}
+                      onChange={() => setTeamParticipation("individual")}
                     />
-                    <FieldArray
-                      name="members"
-                      render={(arrayHelpers) => (
-                        <div>
-                          {values.members.map((member, index) => (
-                            <div key={index} className="flex gap-2 mb-2">
+                    Individual
+                  </label>
+                  <label className="flex items-center gap-2">
+                    <input
+                      type="radio"
+                      name="teamParticipation"
+                      value="team"
+                      checked={teamParticipation === "team"}
+                      onChange={() => setTeamParticipation("team")}
+                    />
+                    Team
+                  </label>
+                </div>
+              </div>
+
+              {/* Team Section */}
+              {teamParticipation === "team" && (
+                <div className="border rounded-xl p-4 bg-gray-50 shadow-inner">
+                  {/* Team Name */}
+                  <Field
+                    name="teamName"
+                    placeholder="Team Name"
+                    className="border p-3 rounded-lg w-full mb-4 focus:ring-2 focus:ring-indigo-400 outline-none"
+                  />
+
+                  {/* Team Members */}
+                  <FieldArray
+                    name="members"
+                    render={(arrayHelpers) => (
+                      <div className="space-y-4">
+                        {values.members.map((member, index) => (
+                          <div
+                            key={index}
+                            className="grid grid-cols-1 md:grid-cols-3 gap-3 items-center"
+                          >
+                            <Field
+                              name={`members.${index}.name`}
+                              placeholder={`Member ${index + 1} Name`}
+                              className="border p-3 rounded-lg focus:ring-2 focus:ring-indigo-400 outline-none"
+                            />
+                            <Field
+                              type="email"
+                              name={`members.${index}.email`}
+                              placeholder="Email"
+                              className="border p-3 rounded-lg focus:ring-2 focus:ring-indigo-400 outline-none"
+                            />
+                            <div className="flex gap-2">
                               <Field
-                                name={`members.${index}`}
-                                placeholder={`Member ${index + 1}: Name - Dept - Contact`}
+                                name={`members.${index}.department`}
+                                placeholder="Department"
                                 className="border p-3 rounded-lg w-full focus:ring-2 focus:ring-indigo-400 outline-none"
                               />
                               {index > 0 && (
@@ -193,49 +213,36 @@ export default function CandidateRegistrationForm() {
                                 </button>
                               )}
                             </div>
-                          ))}
-                          <button
-                            type="button"
-                            className="bg-green-600 text-white px-4 py-2 rounded-lg mt-2 hover:bg-green-700"
-                            onClick={() => arrayHelpers.push("")}
-                          >
-                            ➕ Add Member
-                          </button>
-                        </div>
-                      )}
-                    />
-                  </div>
-                )}
-              </section>
+                          </div>
+                        ))}
 
-              {/* System Fields */}
-              <section className="bg-gray-50 p-6 rounded-xl shadow-md">
-                <h2 className="text-2xl font-semibold mb-4 text-indigo-700 border-b pb-2">
-                  System Info (Auto)
-                </h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <input
-                    className="border p-3 rounded-lg bg-gray-100"
-                    value="Auto-generated after submit"
-                    disabled
-                  />
-                  <input
-                    className="border p-3 rounded-lg bg-gray-100"
-                    value={new Date().toLocaleString()}
-                    disabled
+                        {/* Add Member Button */}
+                        <button
+                          type="button"
+                          className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600"
+                          onClick={() =>
+                            arrayHelpers.push({
+                              name: "",
+                              email: "",
+                              department: "",
+                            })
+                          }
+                        >
+                          ➕ Add Member
+                        </button>
+                      </div>
+                    )}
                   />
                 </div>
-              </section>
+              )}
 
-              {/* Submit */}
-              <div className="text-center">
-                <button
-                  type="submit"
-                  className="bg-indigo-600 text-white px-8 py-3 rounded-xl text-lg font-semibold shadow-md hover:bg-indigo-700 transition"
-                >
-                  Submit Registration
-                </button>
-              </div>
+              {/* Submit Button */}
+              <button
+                type="submit"
+                className="w-full bg-indigo-600 text-white py-3 rounded-lg font-semibold hover:bg-indigo-700 transition"
+              >
+                Submit Registration
+              </button>
             </Form>
           )}
         </Formik>
