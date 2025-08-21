@@ -15,8 +15,8 @@ export default function LocationPage() {
     return (
         <div className="min-h-[calc(100vh-3rem)] p-4  w-full justify-center items-center h-auto bg-gradient-to-br from-blue-600 via-indigo-700 to-purple-800 flex rounded">
             <div>
-                <div className="mb-6 text-center">
-                    <h1 className="text-2xl md:text-3xl font-extrabold text-white">
+                <div className="mb-6 text-center ">
+                    <h1 className="text-2xl md:text-3xl font-extrabold text-white ">
                         Periyar University — Location
                     </h1>
                     <p className="text-white">
@@ -24,10 +24,10 @@ export default function LocationPage() {
                     </p>
                 </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 ">
                     <div className="lg:col-span-1">
-                        <div className="bg-white rounded-2xl shadow-md p-6 space-y-4">
-                            <div>
+                        <div className="bg-white rounded-2xl shadow-md p-6 space-y-4 mt-12">
+                            <div >
                                 <h2 className="text-xl font-semibold text-gray-900">
                                     Campus Address
                                 </h2>
