@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { usePathname } from "next/navigation"; // ✅ Import this
+import { usePathname } from "next/navigation"; 
 import {
   Home,
   Calendar,
@@ -17,7 +17,7 @@ export default function Sidebar() {
   const [open, setOpen] = useState(true);
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  const pathname = usePathname(); // ✅ Get current route
+  const pathname = usePathname(); 
 
   // Menu Items
   const menus = [
@@ -43,7 +43,7 @@ export default function Sidebar() {
 
       {/* Sidebar */}
       <motion.div
-        animate={{ width: open ? 240 : 70 }}
+        // animate={{ width: open ? 240 : 70 }}
         className={`
           h-screen bg-gradient-to-b from-blue-600 via-blue-700 to-indigo-800
           p-4 pt-6 text-white shadow-2xl flex flex-col fixed top-0 left-0 z-40
@@ -74,13 +74,13 @@ export default function Sidebar() {
         {/* Menu */}
         <div className="flex flex-col gap-2">
           {menus.map((menu, i) => {
-            const isActive = pathname === menu.path; // ✅ Active route check
+            const isActive = pathname === menu.path; 
             return (
               <Link href={menu.path} key={i}>
                 <motion.div
                   whileHover={{ scale: 1.05, x: 5 }}
                   className={`
-                    flex items-center gap-4 cursor-pointer p-3 rounded-xl transition-all
+                    flex items-center gap-4 cursor-pointer p-3 rounded-xl
                     ${isActive ? "bg-blue-500 shadow-lg" : "hover:bg-blue-500/40"}
                   `}
                 >

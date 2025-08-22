@@ -2,7 +2,7 @@ import Timer from "./_componets/Timer";
 
 export default function Page() {
   return (
-    <div className="w-full h-screen flex flex-col items-center justify-center bg-gradient-to-br from-blue-600 via-indigo-700 to-purple-800 relative text-white">
+    <div className="w-full h-screen flex flex-col rounded items-center justify-center bg-gradient-to-br from-blue-600 via-indigo-700 to-purple-800 relative text-white">
       
       {/* Top Title */}
       <h1 className="absolute top-10 text-xl md:text-4xl font-extrabold text-center drop-shadow-lg">

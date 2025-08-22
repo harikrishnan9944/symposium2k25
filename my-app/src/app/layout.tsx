@@ -32,8 +32,19 @@ export default function RootLayout({
         <div className="flex">
           {/* Sidebar */}
           <Sidebar />
-          <main className=" flex flex-1 lg:ml-[240px] ml-[70px] justify-center items-center overflow-y-hidden
-           p-2">
+          <main
+            className="
+              flex flex-1 
+              ml-0
+              sm:ml-0
+              md:ml-[0px]
+              lg:ml-[240px]
+              justify-center items-center 
+              overflow-y-hidden pl-4
+              pr-2
+              py-2
+            "
+          >
             {children}
           </main>
         </div>
