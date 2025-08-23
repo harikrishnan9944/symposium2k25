@@ -39,7 +39,7 @@ export async function POST(req: Request) {
 // {
 //   "firstName": "Priya",
 //   "middleName": "Lakshmi",
-//   "lastName": "Kumar",
+//   "lastName": "Kumar",rew
 //   "gender": "Female",
 //   "dob": "2001-08-20",
 //   "contact": "9876001122",
