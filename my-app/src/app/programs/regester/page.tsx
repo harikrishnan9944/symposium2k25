@@ -23,7 +23,7 @@ export default function RegistrationForm() {
       <div className="w-full max-w-5xl bg-white shadow-2xl rounded-2xl p-10">
         {/* Title */}
         <h1 className="text-3xl font-extrabold text-center text-indigo-700 mb-2">
-          Periyar University Symposium 2K25
+          Periyar University-Salem Symposium 2025 
         </h1>
         <p className="text-center text-gray-600 mb-8">Registration Form</p>
 
