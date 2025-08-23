@@ -33,3 +33,39 @@ export async function POST(req: Request) {
     );
   }
 }
+
+
+
+// {
+//   "firstName": "Priya",
+//   "middleName": "Lakshmi",
+//   "lastName": "Kumar",
+//   "gender": "Female",
+//   "dob": "2001-08-20",
+//   "contact": "9876001122",
+//   "email": "priya.lakshmi2025@example.com",
+//   "college": "Anna University",
+//   "department": "Electronics and Communication",
+//   "year": "Final Year",
+//   "rollNo": "EC2025A045",
+//   "events": ["Paper Presentation", "Poster Design", "Technical Quiz"],
+//   "teamParticipation": "team",
+//   "teamName": "Innovators Hub",
+//   "members": [
+//     {
+//       "name": "Suresh R",
+//       "email": "suresh.r@example.com",
+//       "department": "ECE"
+//     },
+//     {
+//       "name": "Meena S",
+//       "email": "meena.s@example.com",
+//       "department": "EEE"
+//     },
+//     {
+//       "name": "Vignesh P",
+//       "email": "vignesh.p@example.com",
+//       "department": "CSE"
+//     }
+//   ]
+// }
