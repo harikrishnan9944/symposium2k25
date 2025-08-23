@@ -46,9 +46,25 @@ export default function RegistrationForm() {
             members: [{ name: "", email: "", department: "" }],
           }}
           validationSchema={registrationSchema}
-          onSubmit={(values) => {
-            console.log(values);
-            alert("Form submitted! Check console for data");
+          onSubmit={async (values, { resetForm }) => {
+            try {
+              const res = await fetch("/api/regester", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(values),
+              });
+
+              const data = await res.json();
+              if (res.ok) {
+                alert("✅ Registration successful!");
+                resetForm();
+              } else {
+                alert(data.message || "❌ Something went wrong");
+              }
+            } catch (error) {
+              console.error("Error:", error);
+              alert("⚠️ Failed to submit");
+            }
           }}
         >
           {({ values, setFieldValue }) => (
@@ -60,6 +76,25 @@ export default function RegistrationForm() {
                   <Input name="middleName" placeholder="Middle Name" />
                   <Input name="lastName" placeholder="Last Name" />
                 </div>
+              </Section>
+
+              {/* Gender + DOB */}
+              <Section title="Other Details">
+                <div className="flex gap-10">
+                  <label className="flex items-center gap-2 cursor-pointer">
+                    <Field type="radio" name="gender" value="Male" />
+                    <span>Male</span>
+                  </label>
+                  <label className="flex items-center gap-2 cursor-pointer">
+                    <Field type="radio" name="gender" value="Female" />
+                    <span>Female</span>
+                  </label>
+                  <label className="flex items-center gap-2 cursor-pointer">
+                    <Field type="radio" name="gender" value="Other" />
+                    <span>Other</span>
+                  </label>
+                </div>
+                <Input name="dob" type="date" placeholder="Date of Birth" />
               </Section>
 
               {/* Contact Info */}
@@ -93,7 +128,6 @@ export default function RegistrationForm() {
                       <input
                         type="checkbox"
                         name="events"
-                        className="peer-checked:bg-green-400"
                         value={event}
                         checked={values.events.includes(event)}
                         onChange={(e) => {
@@ -135,7 +169,7 @@ export default function RegistrationForm() {
                       checked={teamParticipation === "team"}
                       onChange={() => setTeamParticipation("team")}
                     />
-                    <span >Team</span>
+                    <span>Team</span>
                   </label>
                 </div>
               </Section>
@@ -153,10 +187,20 @@ export default function RegistrationForm() {
                             key={index}
                             className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center"
                           >
-                            <Input name={`members.${index}.name`} placeholder={`Member ${index + 1} Name`} />
-                            <Input name={`members.${index}.email`} placeholder="Email" type="email" />
+                            <Input
+                              name={`members.${index}.name`}
+                              placeholder={`Member ${index + 1} Name`}
+                            />
+                            <Input
+                              name={`members.${index}.email`}
+                              placeholder="Email"
+                              type="email"
+                            />
                             <div className="flex gap-3 items-center">
-                              <Input name={`members.${index}.department`} placeholder="Department" />
+                              <Input
+                                name={`members.${index}.department`}
+                                placeholder="Department"
+                              />
                               {index > 0 && (
                                 <button
                                   type="button"
@@ -199,7 +243,6 @@ export default function RegistrationForm() {
   );
 }
 
-
 function Section({ title, children, className = "" }) {
   return (
     <div className={`space-y-3 ${className}`}>
@@ -208,7 +251,6 @@ function Section({ title, children, className = "" }) {
     </div>
   );
 }
-
 
 function Input({ name, placeholder, type = "text" }) {
   return (
@@ -223,7 +265,6 @@ function Input({ name, placeholder, type = "text" }) {
     </div>
   );
 }
-
 
 function Error({ name }) {
   return (
