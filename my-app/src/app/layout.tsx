@@ -37,12 +37,13 @@ export default function RootLayout({
               flex flex-1 
               ml-0
               sm:ml-0
+              sm:p-0
               md:ml-[0px]
               lg:ml-[240px]
               justify-center items-center 
-              overflow-y-hidden pl-4
-              pr-2
-              py-2
+              overflow-y-hidden md:pl-4
+              md:pr-2
+             md:py-2
             "
           >
             {children}

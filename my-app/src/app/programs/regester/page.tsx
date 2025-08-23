@@ -93,6 +93,7 @@ export default function RegistrationForm() {
                       <input
                         type="checkbox"
                         name="events"
+                        className="peer-checked:bg-green-400"
                         value={event}
                         checked={values.events.includes(event)}
                         onChange={(e) => {
@@ -115,7 +116,7 @@ export default function RegistrationForm() {
 
               {/* Participation Type */}
               <Section title="Participation Type">
-                <div className="flex gap-10">
+                <div className="flex gap-10 text-black">
                   <label className="flex items-center gap-2 cursor-pointer">
                     <input
                       type="radio"
@@ -134,7 +135,7 @@ export default function RegistrationForm() {
                       checked={teamParticipation === "team"}
                       onChange={() => setTeamParticipation("team")}
                     />
-                    <span>Team</span>
+                    <span >Team</span>
                   </label>
                 </div>
               </Section>
@@ -198,7 +199,7 @@ export default function RegistrationForm() {
   );
 }
 
-/* 🔹 Reusable Section Component */
+
 function Section({ title, children, className = "" }) {
   return (
     <div className={`space-y-3 ${className}`}>
@@ -208,7 +209,7 @@ function Section({ title, children, className = "" }) {
   );
 }
 
-/* 🔹 Reusable Input with Error */
+
 function Input({ name, placeholder, type = "text" }) {
   return (
     <div>
@@ -216,14 +217,14 @@ function Input({ name, placeholder, type = "text" }) {
         name={name}
         type={type}
         placeholder={placeholder}
-        className="w-full border p-3 rounded-lg focus:ring-2 focus:ring-indigo-400 outline-none"
+        className="w-full border text-black p-3 rounded-lg focus:ring-2 focus:ring-indigo-400 outline-none"
       />
       <Error name={name} />
     </div>
   );
 }
 
-/* 🔹 Reusable Error */
+
 function Error({ name }) {
   return (
     <ErrorMessage
